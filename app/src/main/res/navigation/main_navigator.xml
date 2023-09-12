@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigator"
+    app:startDestination="@id/startFragment">
+
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.example.apiintegration.StartFragment"
+        android:label="Start Fragment"
+        tools:layout="@layout/fragment_start" >
+
+        <action
+            android:id="@+id/action_startFragment_to_blankFragment"
+            app:destination="@id/fragment1layout" />
+
+        <action
+            android:id="@+id/action_startFragment_to_blankFragment2"
+            app:destination="@id/fragment2layout" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment1layout"
+        android:name="com.example.apiintegration.BlankFragment"
+        android:label="Dagens Prognos"
+        tools:layout="@layout/fragment_blank" >
+        <action
+            android:id="@+id/action_fragment1layout_to_detailedWeatherFragment"
+            app:destination="@id/detailedWeatherFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment2layout"
+        android:name="com.example.apiintegration.BlankFragment2"
+        android:label="Joke"
+        tools:layout="@layout/fragment_blank2" />
+    <fragment
+        android:id="@+id/detailedWeatherFragment"
+        android:name="com.example.apiintegration.DetailedWeatherFragment"
+        android:label="fragment_detailed_weather"
+        tools:layout="@layout/fragment_detailed_weather" />
+
+</navigation>
