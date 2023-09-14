@@ -22,7 +22,6 @@ class StartFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Skapa RequestQueue när fragmentet skapas
         requestQueue = Volley.newRequestQueue(requireContext())
     }
 
@@ -36,12 +35,10 @@ class StartFragment : Fragment() {
         val getJokeButton = view.findViewById<Button>(R.id.buttonGetJoke)
 
         getCurrentWeatherButton.setOnClickListener {
-            // Gör API-anropet för väder här och skicka data till BlankFragment
             makeWeatherApiCall("Malmo")
         }
 
         getJokeButton.setOnClickListener {
-            // Gör API-anropet för skämt här och skicka data till BlankFragment2
             fetchJoke()
         }
 
@@ -61,7 +58,6 @@ class StartFragment : Fragment() {
                     val description =
                         response.getJSONArray("weather").getJSONObject(0).getString("description")
 
-                    // Skicka data till BlankFragment
                     val bundle = Bundle()
                     bundle.putString("city", city)
                     bundle.putString("temperature", "$temperature °C")
@@ -75,7 +71,6 @@ class StartFragment : Fragment() {
                 error.printStackTrace()
             })
 
-        // Lägg till JSON-begäran i RequestQueue
         requestQueue.add(jsonRequest)
     }
 
@@ -88,12 +83,13 @@ class StartFragment : Fragment() {
                 try {
                     val joke = response.getString("joke")
 
-                    // Skapa ett Bundle för att skicka skämtet till BlankFragment2
                     val bundle = Bundle()
                     bundle.putString("joke", joke)
 
-                    // Skicka data till BlankFragment2
-                    findNavController().navigate(R.id.action_startFragment_to_blankFragment2, bundle)
+                    findNavController().navigate(
+                        R.id.action_startFragment_to_blankFragment2,
+                        bundle
+                    )
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
@@ -102,7 +98,6 @@ class StartFragment : Fragment() {
                 error.printStackTrace()
             })
 
-        // Lägg till JSON-begäran i RequestQueue
         requestQueue.add(jsonRequest)
     }
 

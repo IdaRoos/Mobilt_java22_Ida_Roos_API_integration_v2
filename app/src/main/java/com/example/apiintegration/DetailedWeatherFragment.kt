@@ -16,15 +16,13 @@ class DetailedWeatherFragment : Fragment() {
     private lateinit var windTextView: TextView
 
 
-    // ...
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_detailed_weather, container, false)
 
-        // Hitta dina TextViews i layouten
+
         humidityTextView = view.findViewById(R.id.humidityTextView)
         windTextView = view.findViewById(R.id.windTextView)
         val backButton = view.findViewById<Button>(R.id.backToMainButton)
@@ -34,7 +32,6 @@ class DetailedWeatherFragment : Fragment() {
         val humidity = arguments?.getInt("humidity")
         val windSpeed = arguments?.getDouble("windSpeed")
 
-        // Visa väderinformation
         humidityTextView.text = "Humidity: $humidity"
         windTextView.text = "Wind Speed: $windSpeed m/s"
 
@@ -43,7 +40,7 @@ class DetailedWeatherFragment : Fragment() {
         backButton.setOnClickListener {
             // Hämta NavController
             val navController = findNavController()
-            // Använd popBackStack() med rätt flaggor för att rensa backstacken och gå till första sidan
+            // Använd popBackStack() för att rensa backstacken och gå till första sidan
             navController.popBackStack(R.id.startFragment, true)
         }
 

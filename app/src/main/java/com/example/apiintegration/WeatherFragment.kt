@@ -15,7 +15,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 
 
-class BlankFragment : Fragment() {
+class WeatherFragment : Fragment() {
 
     private lateinit var currentWeatherTextView: TextView
     private lateinit var cityTextView: TextView
@@ -24,7 +24,6 @@ class BlankFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Skapa RequestQueue när fragmentet skapas
         requestQueue = Volley.newRequestQueue(requireContext())
     }
 
@@ -32,7 +31,7 @@ class BlankFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_blank, container, false)
+        val view = inflater.inflate(R.layout.fragment_weather, container, false)
 
         cityTextView = view.findViewById(R.id.cityTextView)
         temperatureTextView = view.findViewById(R.id.temperatureTextView)
@@ -43,7 +42,7 @@ class BlankFragment : Fragment() {
         val temperature = arguments?.getString("temperature")
         val description = arguments?.getString("description")
 
-        // Visa väderinformation
+
         cityTextView.text = "City: $city"
         temperatureTextView.text = "Temperature: $temperature"
         currentWeatherTextView.text = "Weather: $description"
@@ -59,7 +58,6 @@ class BlankFragment : Fragment() {
         return view
     }
 
-// ...
 
     private fun getDetailedWeather(city: String) {
         val apiKey = "a7e238d25af91b54f6450f60a5849740"
@@ -72,12 +70,14 @@ class BlankFragment : Fragment() {
                     val humidity = response.getJSONObject("main").getInt("humidity")
                     val windSpeed = response.getJSONObject("wind").getDouble("speed")
 
-                    // Skapa ett Bundle och skicka med den detaljerade informationen till DetailedWeatherFragment
                     val bundle = Bundle()
                     bundle.putInt("humidity", humidity)
                     bundle.putDouble("windSpeed", windSpeed)
 
-                    findNavController().navigate(R.id.action_fragment1layout_to_detailedWeatherFragment, bundle)
+                    findNavController().navigate(
+                        R.id.action_fragment1layout_to_detailedWeatherFragment,
+                        bundle
+                    )
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
@@ -86,7 +86,6 @@ class BlankFragment : Fragment() {
                 error.printStackTrace()
             })
 
-        // Lägg till JSON-begäran i RequestQueue
         requestQueue.add(jsonRequest)
     }
 
